@@ -6,6 +6,8 @@ You must have Greasemonkey installed on Firefox. If you use Google Chrome, Tampe
 
 [Click here](https://raw.githubusercontent.com/StakeSagaQuo/9gag-delete-nsfw/master/9gag_nsfw_delete.user.js) to install the script.
 
+It will automatically update if there are updates available.
+
 ## Purpose
 9gag, by default, hides posts that their users submit as NSFW. It shows a black banner instead of the post, requiring the user to login and allow NSFW posts.
 
