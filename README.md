@@ -1,6 +1,11 @@
 # 9gag-delete-nsfw
 This greasemonkey script will automatically delete any posts marked as NSFW.
 
+## Install
+You must have Greasemonkey installed on Firefox. If you use Google Chrome, Tampermonkey will work.
+
+[Click here](https://raw.githubusercontent.com/StakeSagaQuo/9gag-delete-nsfw/master/9gag_nsfw_delete.user.js) to install the script.
+
 ## Purpose
 9gag, by default, hides posts that their users submit as NSFW. It shows a black banner instead of the post, requiring the user to login and allow NSFW posts.
 
