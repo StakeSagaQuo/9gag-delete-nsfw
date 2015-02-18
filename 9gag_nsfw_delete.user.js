@@ -40,20 +40,7 @@ function mutationHandler(mutationRecords) {
       }
     });
 
-    mutationRecords.forEach(function (mutation) {
-
-        if (mutation.type == "childList"
-            && typeof mutation.addedNodes == "object"
-            && mutation.addedNodes.length
-            ) {
-            for (var J = 0, L = mutation.addedNodes.length; J < L; ++J) {
-                check_for_nsfw(mutation.addedNodes[J]);
-            }
-        }
-        else if (mutation.type == "attributes") {
-            check_for_nsfw(mutation.target);
-        }
-    });
+    
 }
 
 function check_for_nsfw(node) {
