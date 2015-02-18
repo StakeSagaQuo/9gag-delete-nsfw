@@ -17,7 +17,9 @@ jQuery(document).ready(function () {
     jQuery('a[href$="nsfw"]').parents('li').remove();
 });
 
-MutationObserver = window.MutationObserver || window.WebKitMutationObserver
+// multi-browser compatibility
+var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+
 var myObserver = new MutationObserver(mutationHandler);
 
 var obsConfig = {
@@ -30,6 +32,13 @@ var obsConfig = {
 myObserver.observe(document, obsConfig);
 
 function mutationHandler(mutationRecords) {
+    mutations.forEach(function(mutation) {
+      if (mutation.type === 'childList') {
+            var count = list.children.length;
+          list.children[count-1].innerHTML =
+              "Element " + count + " has been injected!";
+      }
+    });
 
     mutationRecords.forEach(function (mutation) {
 
