@@ -14,10 +14,7 @@
 
 jQuery( document ).ready(function(){
   // remove the nsfw links
-  jQuery('a[href$="nsfw"]').parents('li').remove(); 
-  
-  
-  
+  jQuery('a[href$="nsfw"]').parents('li').remove();
 });
 
 // remove new posts as you scroll
