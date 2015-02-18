@@ -2,10 +2,15 @@
 This greasemonkey script will automatically delete any posts marked as NSFW.
 
 ## Install
-You must have Greasemonkey installed on Firefox. If you use Google Chrome, Tampermonkey will work.
+### Firefox
+You must have Greasemonkey installed on Firefox.
 
 [Click here](https://raw.githubusercontent.com/StakeSagaQuo/9gag-delete-nsfw/master/9gag_nsfw_delete.user.js) to install the script.
 
+### Chrome
+You should install Tampermonkey. Then, open [chrome:extensions](chrome://extensions) in a new window. Click and hold on [this link](https://raw.githubusercontent.com/StakeSagaQuo/9gag-delete-nsfw/master/9gag_nsfw_delete.user.js) and drag-and-drop it onto the chrome extensions page.
+
+## Updates
 It will automatically update if there are updates available.
 
 ## Purpose
