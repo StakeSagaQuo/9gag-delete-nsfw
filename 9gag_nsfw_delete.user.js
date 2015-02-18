@@ -20,11 +20,12 @@ jQuery( document ).ready(function(){
   // these don't get populated by scrolling, so no need to do it on ajax complete.
   jQuery("li.badge-featured-item:contains('NSFW')").remove(); // sidebar links
   
-  jQuery("div.badge-grid-item:contains('NSFW')").remove(); // 9gag.tv links. Almost all NSFW videos have this text.
 });
+
+// remove new posts as you scroll
 jQuery( document ).ajaxComplete(function() {
-  // remove new posts as you scroll
-  
   // on ajax (scroll to bottom, initial page load), delete nsfw posts
-  jQuery('.badge-nsfw-entry-cover, .nsfw-post').parents('article').remove(); 
+  jQuery('.badge-nsfw-entry-cover, .nsfw-post').parents('article').remove();   
+  
+  jQuery("div.badge-grid-item:contains('NSFW')").remove(); // 9gag.tv links. Almost all NSFW videos have this text.
 });
