@@ -37,7 +37,7 @@ function remove_ajax_nsfw(){
  * the nsfw flag within the main post.
 */
 function bruteforce_sidebar_nsfw(){
-    jQuery("li.badge-featured-item").each(function (index) {
+    jQuery("li.badge-featured-item:not(data-nsfw-remove-check='clean')").each(function (index) {
         sidebar_href = (jQuery(this).find('.img-container a').attr('href'));
         if (sidebar_href.match(document.domain)){
             // can only load content from same domain - cross site origin policy
@@ -50,6 +50,10 @@ function bruteforce_sidebar_nsfw(){
                         // found a NSFW post that wasn't flagged as such on the sidebar link.
                         // remove it.
                         jQuery(this).remove();
+                    } else {
+                        jQuery(this).data('nsfw-remove-check','clean'); 
+                        // add a flag so other ajax calls don't cause the sidebar pages
+                        // to load again unnecessarily
                     }
                 }
             });
