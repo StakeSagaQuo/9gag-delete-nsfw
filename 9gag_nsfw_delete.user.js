@@ -27,6 +27,34 @@ function remove_ajax_nsfw(){
  jQuery("div.badge-grid-item:contains('NSFW')").remove(); // 9gag.tv links. Almost all NSFW videos have this text.
 
  jQuery("#jsid-post-container[data-title*='NSFW']").remove(); // 9gag.tv current video
+ 
+ bruteforce_sidebar_nsfw(); // manually check all remaining sidebar items.
+}
+
+/**
+ * Sometimes, a sidebar NSFW shows up without any meta-data saying it is nsfw.
+ * This function loads every sidebar item remaining, and checks the other page for
+ * the nsfw flag within the main post.
+*/
+function bruteforce_sidebar_nsfw(){
+    jQuery("li.badge-featured-item").each(function (index) {
+        sidebar_href = (jQuery(this).find('.img-container a').attr('href'));
+        if (sidebar_href.match(document.domain)){
+            // can only load content from same domain - cross site origin policy
+            jQuery.ajax({
+                type: "GET",
+                context: this,
+                url: sidebar_href,
+                success: function(data){      
+                    if (jQuery(data).find('#individual-post div.nsfw-post').length){
+                        // found a NSFW post that wasn't flagged as such on the sidebar link.
+                        // remove it.
+                        jQuery(this).remove();
+                    }
+                }
+            });
+        }
+    });
 }
 
  // remove new posts as you scroll
