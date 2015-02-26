@@ -6,7 +6,7 @@
 // @include     http://9gag.com/
 // @include     http://9gag.tv/*
 // @include     http://9gag.tv/
-// @version     1.4
+// @version     1.4.1
 // @grant       none
 // @downloadURL https://raw.githubusercontent.com/StakeSagaQuo/9gag-delete-nsfw/master/9gag_nsfw_delete.user.js
 // @updateURL https://raw.githubusercontent.com/StakeSagaQuo/9gag-delete-nsfw/master/9gag_nsfw_delete.user.js
@@ -37,7 +37,7 @@ function remove_ajax_nsfw(){
  * the nsfw flag within the main post.
 */
 function bruteforce_sidebar_nsfw(){
-    jQuery("li.badge-featured-item:not(data-nsfw-remove-check='clean')").each(function (index) {
+    jQuery("li.badge-featured-item:not(.ssqclean)").each(function (index) {
         sidebar_href = (jQuery(this).find('.img-container a').attr('href'));
         if (sidebar_href.match(document.domain)){
             // can only load content from same domain - cross site origin policy
@@ -51,7 +51,7 @@ function bruteforce_sidebar_nsfw(){
                         // remove it.
                         jQuery(this).remove();
                     } else {
-                        jQuery(this).data('nsfw-remove-check','clean'); 
+                        jQuery(this).addClass('ssqclean'); 
                         // add a flag so other ajax calls don't cause the sidebar pages
                         // to load again unnecessarily
                     }
