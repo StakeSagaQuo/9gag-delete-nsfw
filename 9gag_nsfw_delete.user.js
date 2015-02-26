@@ -6,7 +6,7 @@
 // @include     http://9gag.com/
 // @include     http://9gag.tv/*
 // @include     http://9gag.tv/
-// @version     1.4.1
+// @version     1.4.3
 // @grant       none
 // @downloadURL https://raw.githubusercontent.com/StakeSagaQuo/9gag-delete-nsfw/master/9gag_nsfw_delete.user.js
 // @updateURL https://raw.githubusercontent.com/StakeSagaQuo/9gag-delete-nsfw/master/9gag_nsfw_delete.user.js
@@ -37,6 +37,7 @@ function remove_ajax_nsfw(){
  * the nsfw flag within the main post.
 */
 function bruteforce_sidebar_nsfw(){
+    var sidebar_href = '';
     jQuery("li.badge-featured-item:not(.ssqclean)").each(function (index) {
         sidebar_href = (jQuery(this).find('.img-container a').attr('href'));
         if (sidebar_href.match(document.domain)){
@@ -50,14 +51,15 @@ function bruteforce_sidebar_nsfw(){
                         // found a NSFW post that wasn't flagged as such on the sidebar link.
                         // remove it.
                         jQuery(this).remove();
-                    } else {
-                        jQuery(this).addClass('ssqclean'); 
-                        // add a flag so other ajax calls don't cause the sidebar pages
-                        // to load again unnecessarily
-                    }
+                    } 
                 }
             });
         }
+        jQuery(this).addClass('ssqclean');
+        // add a flag so other ajax calls don't cause the sidebar pages
+        // to load again unnecessarily.
+        // don't put this in the ajax call, or else it may not get added quickly enough
+        // before the next call, causing recursion.
     });
 }
 
