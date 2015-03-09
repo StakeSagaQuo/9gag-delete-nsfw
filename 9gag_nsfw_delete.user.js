@@ -6,7 +6,7 @@
 // @include     http://9gag.com/
 // @include     http://9gag.tv/*
 // @include     http://9gag.tv/
-// @version     1.4.3
+// @version     1.5.0
 // @grant       none
 // @downloadURL https://raw.githubusercontent.com/StakeSagaQuo/9gag-delete-nsfw/master/9gag_nsfw_delete.user.js
 // @updateURL https://raw.githubusercontent.com/StakeSagaQuo/9gag-delete-nsfw/master/9gag_nsfw_delete.user.js
