@@ -27,7 +27,7 @@ function remove_ajax_nsfw(){
  jQuery("div.badge-grid-item:contains('NSFW')").remove(); // 9gag.tv links. Almost all NSFW videos have this text.
 
  jQuery("#jsid-post-container[data-title*='NSFW']").remove(); // 9gag.tv current video
- 
+
  bruteforce_sidebar_nsfw(); // manually check all remaining sidebar items.
 }
 
@@ -38,28 +38,54 @@ function remove_ajax_nsfw(){
 */
 function bruteforce_sidebar_nsfw(){
     var sidebar_href = '';
-    jQuery("li.badge-featured-item:not(.ssqclean)").each(function (index) {
+    jQuery("li.badge-featured-item:not(.ssqclean)").each(function () {
         sidebar_href = (jQuery(this).find('.img-container a').attr('href'));
         if (sidebar_href.match(document.domain)){
             // can only load content from same domain - cross site origin policy
-            jQuery.ajax({
+            ajax_nsfw_remove(sidebar_href, this);
+
+            /*jQuery.ajax({
                 type: "GET",
                 context: this,
                 url: sidebar_href,
-                success: function(data){      
+                success: function(data){
                     if (jQuery(data).find('#individual-post div.nsfw-post').length){
                         // found a NSFW post that wasn't flagged as such on the sidebar link.
                         // remove it.
                         jQuery(this).remove();
-                    } 
+                    }
                 }
-            });
+            });*/
         }
         jQuery(this).addClass('ssqclean');
         // add a flag so other ajax calls don't cause the sidebar pages
         // to load again unnecessarily.
         // don't put this in the ajax call, or else it may not get added quickly enough
         // before the next call, causing recursion.
+    });
+    // new sidebar ticker
+    jQuery("#jsid-sidebar-ticker-items-container li:not(.ssqclean)").each(function () {
+        var id = jQuery(this).children('a').data('entrykey'); // sidebar ticker doesn't have link, but datakey is all we need
+        sidebar_href = '/gag/' + id;
+        if (id) {
+            ajax_nsfw_remove(sidebar_href, this);
+        }
+        jQuery(this).addClass('ssqclean');
+
+    });
+}
+
+function ajax_nsfw_remove(url, element){
+    jQuery.ajax({
+        type: "GET",
+        url: url,
+        success: function(data){
+            if (jQuery(data).find('#individual-post div.nsfw-post').length){
+                // found a NSFW post that wasn't flagged as such on the sidebar link.
+                // remove it.
+                jQuery(element).remove();
+            }
+        }
     });
 }
 
